@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CS2 Demo Fixer</title>
+<meta name="description" content="แก้ไฟล์ demo CS2 (FACEIT) ที่เปิดแล้วเกมเด้ง ทำงานในเบราว์เซอร์ทั้งหมด ไม่มีการอัปโหลดไฟล์ / Fix CS2 demos that crash the game on playback. Runs in your browser.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#E9EEF2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#101826" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M9 23c-4-3-6-8-4-12 2 3 4 5 7 6' fill='%23fff' stroke='%2316213A' stroke-width='2' stroke-linejoin='round'/%3E%3Cellipse cx='19' cy='24' rx='11' ry='9' fill='%23fff' stroke='%2316213A' stroke-width='2'/%3E%3Ccircle cx='27' cy='13' r='6.2' fill='%23fff' stroke='%2316213A' stroke-width='2'/%3E%3Ccircle cx='25' cy='6.6' r='2.1' fill='%23D93A2B'/%3E%3Ccircle cx='28' cy='6' r='2.3' fill='%23D93A2B'/%3E%3Cpath d='M33 11.6l4.6 1.8-4.6 1.8z' fill='%23F5A300'/%3E%3Ccircle cx='28.6' cy='12' r='1.2' fill='%2316213A'/%3E%3C/svg%3E">
+<link rel="preload" href="fonts/chakra-petch-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="chicken" viewBox="0 0 40 40">
+    <path d="M16 31.5l-1.2 5.5M21.5 31.5l1 5.5M12.6 37h4M20.5 37h4" style="fill:none;stroke:var(--chick-leg);stroke-width:2;stroke-linecap:round"/>
+    <path d="M9.5 23c-4.2-3-6.3-8.2-4.3-12.4 1.8 3 4.3 5.1 7.4 6.2" style="fill:var(--chick-body);stroke:var(--chick-line);stroke-width:1.8;stroke-linejoin:round"/>
+    <ellipse cx="19" cy="24" rx="11.2" ry="8.8" style="fill:var(--chick-body);stroke:var(--chick-line);stroke-width:1.8"/>
+    <circle cx="27" cy="13.2" r="6.2" style="fill:var(--chick-body);stroke:var(--chick-line);stroke-width:1.8"/>
+    <path d="M21.8 19.6c1.8 1 3.6 1 5.2 0" style="fill:var(--chick-body);stroke:none"/>
+    <circle cx="24.6" cy="6.9" r="2.1" style="fill:var(--chick-comb)"/>
+    <circle cx="27.8" cy="6.1" r="2.4" style="fill:var(--chick-comb)"/>
+    <circle cx="30.6" cy="7.6" r="1.8" style="fill:var(--chick-comb)"/>
+    <path d="M33 11.8l4.6 1.8-4.6 1.8z" style="fill:var(--chick-beak)"/>
+    <ellipse cx="32.3" cy="17.2" rx="1.3" ry="1.9" style="fill:var(--chick-comb)"/>
+    <circle cx="28.8" cy="12.2" r="1.2" style="fill:var(--chick-line)"/>
+    <path d="M13.5 23.5c2.6 3.6 7 3.8 9.6.4" style="fill:none;stroke:var(--chick-line);stroke-width:1.6;stroke-linecap:round"/>
+  </symbol>
+</svg>
+
+<div class="page">
+  <header class="top">
+    <span class="wordmark">CS2 Demo Fixer</span>
+    <div class="lang" role="group" aria-label="Language / ภาษา">
+      <button type="button" data-lang="th" aria-pressed="true">ไทย</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1 data-i18n="title">แก้ demo ที่&#8288;เปิด&#8288;แล้ว CS2&nbsp;เด้ง</h1>
+      <p class="lede" data-i18n="lede">สำหรับ demo จาก FACEIT ที่เกมเด้งทันทีตอนสั่ง playdemo ลากไฟล์มาวาง แล้วดาวน์โหลดไฟล์ที่แก้แล้วไปเปิดในเกมได้เลย</p>
+
+      <label class="drop" id="drop">
+        <input id="file" class="visually-hidden" type="file" multiple accept=".dem,.zst,.gz,.bz2">
+        <span class="drop-title" data-i18n="dropTitle">วางไฟล์ demo ที่นี่</span>
+        <span class="drop-row">
+          <span class="drop-or" data-i18n="dropOr">หรือ</span>
+          <span class="btn btn-primary" data-i18n="choose">เลือกไฟล์</span>
+        </span>
+        <span class="drop-note" data-i18n="formats">รองรับ .dem, .dem.zst และ .dem.gz เลือกได้ทีละหลายไฟล์</span>
+        <span class="strip" aria-hidden="true">
+          <span class="lane-signon"></span>
+          <span class="lane-ticks"></span>
+          <svg class="chicken"><use href="#chicken"/></svg>
+        </span>
+      </label>
+      <p class="privacy" data-i18n="privacy">ไฟล์ไม่ถูกอัปโหลดไปไหน ทุกอย่างทำงานในเบราว์เซอร์ของคุณ</p>
+    </section>
+
+    <section class="jobs" id="jobs" hidden></section>
+
+    <section class="howto">
+      <h2 data-i18n="howTitle">เปิด demo ที่แก้แล้ว</h2>
+      <ol class="steps">
+        <li><span data-i18n="step1">ดาวน์โหลดไฟล์ที่แก้แล้ว</span></li>
+        <li><span data-i18n-html="step2">ย้ายไฟล์ไปไว้ในโฟลเดอร์ <code>steamapps\common\Counter-Strike Global Offensive\game\csgo</code></span></li>
+        <li><span data-i18n-html="step3">เปิด console ในเกม แล้วพิมพ์ <code>playdemo</code> ตามด้วยชื่อไฟล์ ไม่ต้องใส่ .dem</span></li>
+      </ol>
+    </section>
+
+    <section class="explain">
+      <details>
+        <summary data-i18n="whyTitle">ทำไม demo พวกนี้ถึงทำให้เกมเด้ง</summary>
+        <div class="explain-body">
+          <p data-i18n="why1"></p>
+          <p data-i18n="why2"></p>
+          <p data-i18n="why3"></p>
+          <p data-i18n="why4"></p>
+          <h3 data-i18n="techTitle">รายละเอียดทางเทคนิค</h3>
+          <p class="tech" data-i18n-html="tech"></p>
+        </div>
+      </details>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p><span data-i18n="tested">ทดสอบกับ CS2 เวอร์ชัน 1.41.9.2 (ตุลาคม 2026)</span> <span data-i18n="notAffiliated">ไม่เกี่ยวข้องกับ Valve หรือ FACEIT</span></p>
+    <p><a id="source-link" hidden data-i18n="source">ซอร์สโค้ด</a></p>
+  </footer>
+</div>
+
+<template id="job-template">
+  <article class="job">
+    <div class="job-head">
+      <span class="job-name"></span>
+      <span class="job-meta"></span>
+    </div>
+    <div class="timeline" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+      <span class="lane-signon"></span>
+      <span class="lane-track"><span class="lane-fill"></span></span>
+      <svg class="chicken" aria-hidden="true"><use href="#chicken"/></svg>
+    </div>
+    <p class="job-status"></p>
+    <ul class="job-notes"></ul>
+    <div class="job-result" hidden>
+      <a class="btn btn-primary job-download" download></a>
+      <span class="job-file"></span>
+    </div>
+    <div class="job-command" hidden>
+      <span class="job-command-label"></span>
+      <code class="job-command-text"></code>
+      <button type="button" class="btn btn-quiet job-copy"></button>
+    </div>
+  </article>
+</template>
+
+<script src="vendor/fzstd.js"></script>
+<script src="demofix.js"></script>
+<script src="pipeline.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
