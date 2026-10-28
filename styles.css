@@ -272,6 +272,9 @@ code {
 /* ---------- footer */
 .foot { display: grid; gap: 6px; margin-top: 36px; color: var(--muted); font-size: .9rem; }
 .foot p span + span::before { content: " "; }
+.credit-link { color: var(--ink); font-weight: 600; text-decoration: none; white-space: nowrap; }
+.credit-link:hover span { text-decoration: underline; }
+.credit-link .gh { width: 1em; height: 1em; margin-right: .3em; vertical-align: -.14em; fill: currentColor; }
 
 @media (max-width: 560px) {
   :root { --pad: 18px; }

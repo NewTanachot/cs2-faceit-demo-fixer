@@ -24,6 +24,7 @@
       tech: 'เกมเด้งด้วย access violation ใน <code>engine2.dll</code> ที่ <code>GetClassBaseline</code> เพราะ <code>DEM_Packet</code> แรกมี <code>svc_UpdateStringTable</code> ที่เพิ่ม entry ใหม่ใน <code>instancebaseline</code> มาพร้อมกับ <code>PacketEntities</code> แบบ non-delta ชุดแรก tool จะต่อ entry นั้นเข้าไปใน <code>svc_CreateStringTable</code> ตอน signon และใน <code>DEM_StringTables</code> แล้วลบ update ที่ซ้ำของ <code>instancebaseline</code> และ <code>AnimAssetData</code> ออกจาก packet นั้นและจาก <code>DEM_FullPacket</code> ใน tick เดียวกัน message อื่นทั้งหมดถูกคัดลอกไปแบบไบต์ต่อไบต์',
       tested: 'ทดสอบกับ CS2 เวอร์ชัน 1.41.9.2 (ตุลาคม 2026)',
       notAffiliated: 'ไม่เกี่ยวข้องกับ Valve หรือ FACEIT',
+      madeBy: 'ทำโดย',
       source: 'ซอร์สโค้ด',
       minutes: '{n} นาที',
       progressLabel: 'ความคืบหน้า',
@@ -83,6 +84,7 @@
       tech: 'The crash is an access violation in <code>engine2.dll</code> in <code>GetClassBaseline</code>. The first <code>DEM_Packet</code> carries an <code>svc_UpdateStringTable</code> that adds a new <code>instancebaseline</code> entry together with the first non-delta <code>PacketEntities</code>. The tool appends that entry to the signon <code>svc_CreateStringTable</code> and the <code>DEM_StringTables</code> snapshot, then removes the duplicate <code>instancebaseline</code> and <code>AnimAssetData</code> updates from that packet and from the <code>DEM_FullPacket</code> at the same tick. Every other message is copied byte for byte.',
       tested: 'Tested with CS2 1.41.9.2 (October 2026).',
       notAffiliated: 'Not affiliated with Valve or FACEIT.',
+      madeBy: 'Made by',
       source: 'Source code',
       minutes: '{n} min',
       progressLabel: 'Progress',
@@ -436,7 +438,7 @@
     var user = host.split('.')[0], seg = location.pathname.split('/').filter(Boolean)[0];
     var repo = seg && !/\.html?$/i.test(seg) ? seg : user + '.github.io';
     link.href = 'https://github.com/' + user + '/' + repo;
-    link.hidden = false;
+    link.parentNode.hidden = false;
   })();
 
   applyStatic();
