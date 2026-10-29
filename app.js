@@ -2,30 +2,9 @@
 (function () {
   'use strict';
 
+  // Page text lives in index.html (English) and th.html (Thai); these are the messages built while files are processed.
   var STRINGS = {
     th: {
-      title: 'แก้ demo ที่⁠เปิด⁠แล้ว CS2 เด้ง',
-      lede: 'สำหรับ demo จาก FACEIT ที่เกมเด้งทันทีตอนสั่ง playdemo ลากไฟล์มาวาง แล้วดาวน์โหลดไฟล์ที่แก้แล้วไปเปิดในเกมได้เลย',
-      dropTitle: 'วางไฟล์ demo ที่นี่',
-      dropOr: 'หรือ',
-      choose: 'เลือกไฟล์',
-      formats: 'รองรับ .dem, .dem.zst และ .dem.gz เลือกได้ทีละหลายไฟล์',
-      privacy: 'ไฟล์ไม่ถูกอัปโหลดไปไหน ทุกอย่างทำงานในเบราว์เซอร์ของคุณ',
-      howTitle: 'เปิด demo ที่แก้แล้ว',
-      step1: 'ดาวน์โหลดไฟล์ที่แก้แล้ว',
-      step2: 'ย้ายไฟล์ไปไว้ในโฟลเดอร์ <code>steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo</code>',
-      step3: 'เปิด console ในเกม แล้วพิมพ์ <code>playdemo</code> ตามด้วยชื่อไฟล์ ไม่ต้องใส่ .dem',
-      whyTitle: 'ทำไม demo พวกนี้ถึงทำให้เกมเด้ง',
-      why1: 'demo จาก FACEIT บางไฟล์ส่งข้อมูลตั้งต้นของ entity ชนิดใหม่มาที่ tick แรก พร้อมกับตอนที่เกมเริ่มสร้าง entity ทั้งหมด ตัวที่เจอบ่อยคือไก่ (CChicken) ในแมพอย่าง Dust2 และ Nuke',
-      why2: 'CS2 สร้าง entity ชุดแรกหลาย thread พร้อมกันหลังโหลดแมพเสร็จ แต่พอถึงตอนนั้น ข้อมูลตั้งต้นของไก่ชี้ไปที่หน่วยความจำที่ถูกเอาไปใช้อย่างอื่นแล้ว เกมเลยเด้งตั้งแต่ยังไม่ทันเริ่มเล่น',
-      why3: 'tool นี้ย้ายข้อมูลนั้นไปไว้ในตารางที่โหลดตอนเปิด demo แบบเดียวกับ demo ที่เปิดได้ปกติ แล้วตัดข้อมูลที่ส่งซ้ำออก ไก่ยังอยู่ครบทุกตัว ส่วนข้อมูลการเล่นทั้งหมด ทั้งตำแหน่ง การยิง kill และระเบิด เหมือนเดิมทุกอย่าง',
-      why4: 'ถ้าเจอข้อความที่เสีย (UTF-8 ไม่ถูกต้อง) ใน event ของเกม ก็แก้ให้ด้วย เพื่อให้โปรแกรมวิเคราะห์ demo อ่านไฟล์ได้',
-      techTitle: 'รายละเอียดทางเทคนิค',
-      tech: 'เกมเด้งด้วย access violation ใน <code>engine2.dll</code> ที่ <code>GetClassBaseline</code> เพราะ <code>DEM_Packet</code> แรกมี <code>svc_UpdateStringTable</code> ที่เพิ่ม entry ใหม่ใน <code>instancebaseline</code> มาพร้อมกับ <code>PacketEntities</code> แบบ non-delta ชุดแรก tool จะต่อ entry นั้นเข้าไปใน <code>svc_CreateStringTable</code> ตอน signon และใน <code>DEM_StringTables</code> แล้วลบ update ที่ซ้ำของ <code>instancebaseline</code> และ <code>AnimAssetData</code> ออกจาก packet นั้นและจาก <code>DEM_FullPacket</code> ใน tick เดียวกัน message อื่นทั้งหมดถูกคัดลอกไปแบบไบต์ต่อไบต์',
-      tested: 'ทดสอบกับ CS2 เวอร์ชัน 1.41.9.2 (ตุลาคม 2026)',
-      notAffiliated: 'ไม่เกี่ยวข้องกับ Valve หรือ FACEIT',
-      madeBy: 'ทำโดย',
-      source: 'ซอร์สโค้ด',
       minutes: '{n} นาที',
       progressLabel: 'ความคืบหน้า',
       st_queued: 'รอคิว',
@@ -50,6 +29,7 @@
       cmdLabel: 'พิมพ์ใน console',
       copy: 'คัดลอก',
       copied: 'คัดลอกแล้ว',
+      tally: 'แก้ demo ให้ทุกคนไปแล้ว {count} ไฟล์',
       announceFixed: '{name}: แก้แล้ว',
       announceClean: '{name}: ไม่ต้องแก้',
       announceError: '{name}: แก้ไม่ได้',
@@ -64,28 +44,6 @@
       err_UNKNOWN: 'แก้ไม่ได้: {msg}'
     },
     en: {
-      title: 'Fix demos that crash CS2',
-      lede: 'For FACEIT demos that crash the game as soon as you run playdemo. Drop the file here and download a repaired copy to play.',
-      dropTitle: 'Drop demo files here',
-      dropOr: 'or',
-      choose: 'Choose files',
-      formats: 'Works with .dem, .dem.zst and .dem.gz. You can add several at once.',
-      privacy: 'Nothing is uploaded. Everything runs in your browser.',
-      howTitle: 'Play the repaired demo',
-      step1: 'Download the repaired file.',
-      step2: 'Move it into <code>steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo</code>.',
-      step3: 'Open the console in CS2 and type <code>playdemo</code> followed by the file name, without .dem.',
-      whyTitle: 'Why these demos crash the game',
-      why1: 'Some FACEIT demos send the baseline for a new kind of entity at tick 1, at the same moment the game creates every entity. Most often it is the chickens (CChicken), on maps like Dust2 and Nuke.',
-      why2: 'CS2 creates that first batch of entities on several threads once the map has loaded. By then, the chickens’ baseline points at memory that has already been reused, so the game crashes before playback even starts.',
-      why3: 'This tool moves that baseline into the table that loads when the demo opens, the way demos that play fine are built, and removes the duplicate copies. Every chicken is still there, and all gameplay data (positions, shots, kills and grenades) stays exactly the same.',
-      why4: 'It also repairs broken text (invalid UTF-8) in game events, so demo analysis tools can read the file.',
-      techTitle: 'Technical details',
-      tech: 'The crash is an access violation in <code>engine2.dll</code> in <code>GetClassBaseline</code>. The first <code>DEM_Packet</code> carries an <code>svc_UpdateStringTable</code> that adds a new <code>instancebaseline</code> entry together with the first non-delta <code>PacketEntities</code>. The tool appends that entry to the signon <code>svc_CreateStringTable</code> and the <code>DEM_StringTables</code> snapshot, then removes the duplicate <code>instancebaseline</code> and <code>AnimAssetData</code> updates from that packet and from the <code>DEM_FullPacket</code> at the same tick. Every other message is copied byte for byte.',
-      tested: 'Tested with CS2 1.41.9.2 (October 2026).',
-      notAffiliated: 'Not affiliated with Valve or FACEIT.',
-      madeBy: 'Made by',
-      source: 'Source code',
       minutes: '{n} min',
       progressLabel: 'Progress',
       st_queued: 'Waiting',
@@ -110,6 +68,7 @@
       cmdLabel: 'Type in the console',
       copy: 'Copy',
       copied: 'Copied',
+      tally: function (v) { return v.n === 1 ? '1 demo repaired so far' : v.count + ' demos repaired so far'; },
       announceFixed: '{name}: repaired',
       announceClean: '{name}: no repair needed',
       announceError: '{name}: couldn’t repair',
@@ -127,10 +86,9 @@
   var FORMAT_CODES = ['BAD_PROTOBUF', 'BAD_SNAPPY', 'BAD_BITSTREAM', 'BAD_PACKET', 'INTERNAL'];
 
   // ------------------------------------------------------------ language
-  function readLang() { try { return localStorage.getItem('cs2-demo-fixer-lang'); } catch (e) { return null; } }
+  // Each language has its own page. The choice is saved so index.html can send Thai readers to th.html.
   function saveLang(l) { try { localStorage.setItem('cs2-demo-fixer-lang', l); } catch (e) { /* storage unavailable */ } }
-  var lang = readLang() || ((navigator.language || '').toLowerCase().indexOf('th') === 0 ? 'th' : 'en');
-  if (!STRINGS[lang]) lang = 'en';
+  var lang = document.documentElement.lang === 'th' ? 'th' : 'en';
 
   function t(key, vars) {
     var s = STRINGS[lang][key];
@@ -139,14 +97,6 @@
     if (typeof s === 'function') return s(vars || {});
     if (!vars) return s;
     return s.replace(/\{(\w+)\}/g, function (_, k) { return vars[k] != null ? String(vars[k]) : ''; });
-  }
-
-  function applyStatic() {
-    document.documentElement.lang = lang;
-    document.querySelectorAll('[data-i18n]').forEach(function (el) { el.textContent = t(el.getAttribute('data-i18n')); });
-    document.querySelectorAll('[data-i18n-html]').forEach(function (el) { el.innerHTML = t(el.getAttribute('data-i18n-html')); });
-    document.querySelectorAll('.lang button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === lang)); });
-    jobs.forEach(renderJob);
   }
 
   // ------------------------------------------------------------ helpers
@@ -381,6 +331,7 @@
     running = null;
     renderJob(job);
     announce(t(res.changed ? 'announceFixed' : 'announceClean', { name: job.file.name }));
+    if (res.changed && countsRepairs) syncTally('hit');
     pump();
   }
 
@@ -391,6 +342,27 @@
     renderJob(job);
     announce(t('announceError', { name: job.file.name }));
     pump();
+  }
+
+  // ------------------------------------------------------------ shared tally
+  // Demos repaired by everyone, kept on abacus.jasoncameron.dev. A repair sends +1 and nothing about the file.
+  // Copies served from localhost or opened from disk only read the number, so testing doesn't inflate it.
+  var TALLY_URL = 'https://abacus.jasoncameron.dev/{op}/newtanachot-cs2-demo-fixer/demos-fixed';
+  var tallyEl = document.getElementById('tally'), tally = 0;
+  var countsRepairs = /^https?:$/.test(location.protocol) && !/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
+
+  function showTally(n) {
+    if (!(n > tally)) return;   // replies can arrive out of order, and 0 isn't worth showing
+    tally = n;
+    q(tallyEl, '.tally-text').textContent = t('tally', { n: n, count: n.toLocaleString(lang) });
+    tallyEl.hidden = false;
+  }
+  function syncTally(op) {
+    if (typeof fetch !== 'function') return;
+    fetch(TALLY_URL.replace('{op}', op), { cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) { if (d && typeof d.value === 'number') showTally(d.value); },
+        function () { /* counter unreachable: the line stays hidden */ });
   }
 
   // ------------------------------------------------------------ input
@@ -423,12 +395,10 @@
     if (running || queue.length) { e.preventDefault(); e.returnValue = ''; }
   });
 
-  document.querySelectorAll('.lang button').forEach(function (b) {
-    b.addEventListener('click', function () {
-      lang = b.getAttribute('data-lang');
-      saveLang(lang);
-      applyStatic();
-    });
+  document.querySelectorAll('.lang a').forEach(function (a) {
+    // Opened from disk, "./" shows the folder listing rather than the page
+    if (location.protocol === 'file:' && a.getAttribute('href') === './') a.href = 'index.html';
+    a.addEventListener('click', function () { saveLang(a.hreflang); });
   });
 
   // "Source code" link when hosted on GitHub Pages
@@ -441,5 +411,5 @@
     link.parentNode.hidden = false;
   })();
 
-  applyStatic();
+  syncTally('get');
 })();

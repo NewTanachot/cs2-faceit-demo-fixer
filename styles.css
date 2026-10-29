@@ -73,7 +73,7 @@ body {
   font-size: 17px;
   line-height: 1.65;
 }
-h1, h2, h3 { font-family: var(--font-display); line-height: 1.2; margin: 0; }
+h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.2; margin: 0; }
 p { margin: 0; }
 a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 code {
@@ -97,16 +97,15 @@ code {
 .top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 32px; }
 .wordmark { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; }
 .lang { display: inline-flex; border: 1.5px solid var(--line-strong); border-radius: 8px; overflow: hidden; }
-.lang button {
+.lang a {
   font: 600 .9rem/1 var(--font-display);
   color: var(--muted);
-  background: transparent;
-  border: 0;
+  text-decoration: none;
   padding: 9px 13px;
-  cursor: pointer;
 }
-.lang button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
-.lang button:focus-visible { outline-offset: -3px; }
+.lang a:hover { color: var(--ink); }
+.lang a[aria-current="page"] { background: var(--ink); color: var(--bg); }
+.lang a:focus-visible { outline-offset: -3px; }
 
 /* ---------- hero */
 .hero h1 {
@@ -140,6 +139,8 @@ code {
 .drop-or, .drop-note { color: var(--muted); }
 .drop-note { font-size: .95rem; }
 .privacy { margin-top: 12px; color: var(--muted); font-size: .95rem; }
+.tally { display: flex; align-items: center; gap: 8px; margin-top: 8px; font: 600 .95rem/1.3 var(--font-display); }
+.tally-icon { flex: none; width: 26px; height: 26px; }
 
 /* ---------- demo timeline (decorative strip + per-file progress) */
 .lane-signon {
@@ -226,7 +227,7 @@ code {
 
 /* ---------- how to play */
 .howto { margin-top: 60px; }
-.howto h2 { font-size: 1.5rem; font-weight: 700; }
+.howto h2, .faq h2 { font-size: 1.5rem; font-weight: 700; }
 .steps { list-style: none; counter-reset: step; display: grid; gap: 16px; margin: 20px 0 0; padding: 0; }
 .steps li { counter-increment: step; display: grid; grid-template-columns: 38px minmax(0, 1fr); column-gap: 14px; align-items: start; }
 .steps li::before {
@@ -241,20 +242,23 @@ code {
 }
 .steps li > span { padding-top: 5px; }
 
-/* ---------- explanation */
-.explain { margin-top: 48px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.explain summary {
+/* ---------- questions */
+.faq { margin-top: 60px; }
+.faq h2 { margin-bottom: 14px; }
+.faq details { border-top: 1px solid var(--line); }
+.faq details:last-of-type { border-bottom: 1px solid var(--line); }
+.faq summary {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
   padding: 18px 0;
-  font: 700 1.15rem/1.3 var(--font-display);
   list-style: none;
   cursor: pointer;
 }
-.explain summary::-webkit-details-marker { display: none; }
-.explain summary::after {
+.faq summary h3 { font-size: 1.15rem; line-height: 1.3; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
   content: "";
   flex: none;
   width: 10px;
@@ -264,9 +268,9 @@ code {
   transform: translateY(-3px) rotate(45deg);
   transition: transform .2s ease;
 }
-.explain details[open] summary::after { transform: translateY(2px) rotate(-135deg); }
-.explain-body { display: grid; gap: 12px; padding-bottom: 24px; max-width: 40em; }
-.explain-body h3 { font-size: 1rem; margin-top: 8px; }
+.faq details[open] summary::after { transform: translateY(2px) rotate(-135deg); }
+.faq-body { display: grid; gap: 12px; padding-bottom: 24px; max-width: 40em; }
+.faq-body h4 { font-size: 1rem; margin-top: 8px; }
 .tech { font-size: .93rem; color: var(--muted); }
 
 /* ---------- footer */
