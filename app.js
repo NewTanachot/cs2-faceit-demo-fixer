@@ -117,11 +117,7 @@
     var b = name.replace(/\.(zst|gz|bz2)$/i, '').replace(/[._]dem$/i, '').replace(/\s+/g, '_');
     return b || 'demo';
   }
-  function fixedName(name) {
-    var b = baseName(name);
-    var m = b.match(/^(1-[0-9a-f]{8})-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}((?:-\d+)*)$/i);
-    return (m ? m[1] + m[2] : b) + '-fixed.dem';
-  }
+  function fixedName(name) { return baseName(name) + '-fixed.dem'; }
   function plainName(name) { return baseName(name) + '.dem'; }
 
   var announcer = el('p', 'visually-hidden');
